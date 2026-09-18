@@ -13,7 +13,7 @@
   },
   "display": {
     "formats": {
-      "buyShares(bytes32,uint8,uint256)": {
+      "buyShares(bytes32 marketId, uint8 option, uint256 amount)": {
         "intent": "Place bet",
         "fields": [
           { "path": "marketId", "label": "Market ID", "format": "raw" },
@@ -21,59 +21,59 @@
           { "path": "amount", "label": "Bet amount", "format": "tokenAmount", "params": { "token": "$.metadata.constants.csmxa" } }
         ]
       },
-      "claimWinnings(bytes32)": { "intent": "Claim winnings", "fields": [{ "path": "marketId", "label": "Market ID", "format": "raw" }] },
-      "refundBet(bytes32)": { "intent": "Refund bet", "fields": [{ "path": "marketId", "label": "Market ID", "format": "raw" }] },
-      "withdrawFees(bytes32)": { "intent": "Withdraw fees", "fields": [{ "path": "marketId", "label": "Market ID", "format": "raw" }] },
-      "updateCreatorFee(bytes32,uint256)": {
+      "claimWinnings(bytes32 marketId)": { "intent": "Claim winnings", "fields": [{ "path": "marketId", "label": "Market ID", "format": "raw" }] },
+      "refundBet(bytes32 marketId)": { "intent": "Refund bet", "fields": [{ "path": "marketId", "label": "Market ID", "format": "raw" }] },
+      "withdrawFees(bytes32 marketId)": { "intent": "Withdraw fees", "fields": [{ "path": "marketId", "label": "Market ID", "format": "raw" }] },
+      "updateCreatorFee(bytes32 marketId, uint256 newFeeBps)": {
         "intent": "Update creator fee",
         "fields": [
           { "path": "marketId", "label": "Market ID", "format": "raw" },
           { "path": "newFeeBps", "label": "New fee", "format": "unit", "params": { "base": "%", "decimals": 2 } }
         ]
       },
-      "createMarket(bytes32,address,string,uint8,uint256,uint256)": {
+      "createMarket(bytes32 marketId, address creator, string title, uint8 optionCount, uint256 endTime, uint256 creatorFeeBps)": {
         "intent": "Create market",
         "fields": [
           { "path": "marketId", "label": "Market ID", "format": "raw" },
           { "path": "creator", "label": "Creator", "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"] } },
-          { "path": "title", "label": "Title" },
+          { "path": "title", "label": "Title", "format": "raw" },
           { "path": "optionCount", "label": "Options", "format": "raw" },
           { "path": "endTime", "label": "Ends", "format": "date", "params": { "encoding": "timestamp" } },
           { "path": "creatorFeeBps", "label": "Creator fee", "format": "unit", "params": { "base": "%", "decimals": 2 } }
         ]
       },
-      "resolveMarket(bytes32,uint8)": {
+      "resolveMarket(bytes32 marketId, uint8 winningOption)": {
         "intent": "Resolve market",
         "fields": [
           { "path": "marketId", "label": "Market ID", "format": "raw" },
           { "path": "winningOption", "label": "Winning option", "format": "raw" }
         ]
       },
-      "cancelMarket(bytes32)": { "intent": "Cancel market", "fields": [{ "path": "marketId", "label": "Market ID", "format": "raw" }] },
-      "expireUnclaimed(bytes32,address)": {
+      "cancelMarket(bytes32 marketId)": { "intent": "Cancel market", "fields": [{ "path": "marketId", "label": "Market ID", "format": "raw" }] },
+      "expireUnclaimed(bytes32 marketId, address user)": {
         "intent": "Expire unclaimed",
         "fields": [
           { "path": "marketId", "label": "Market ID", "format": "raw" },
           { "path": "user", "label": "User", "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"] } }
         ]
       },
-      "setPlatformFee(uint256)": {
+      "setPlatformFee(uint256 bps)": {
         "intent": "Set platform fee",
         "fields": [{ "path": "bps", "label": "Platform fee", "format": "unit", "params": { "base": "%", "decimals": 2 } }]
       },
-      "setTreasury(address)": {
+      "setTreasury(address _treasury)": {
         "intent": "Set treasury",
         "fields": [{ "path": "_treasury", "label": "Treasury", "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"] } }]
       },
-      "addResolver(address)": {
+      "addResolver(address resolver)": {
         "intent": "Add resolver",
         "fields": [{ "path": "resolver", "label": "Resolver", "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"] } }]
       },
-      "removeResolver(address)": {
+      "removeResolver(address resolver)": {
         "intent": "Remove resolver",
         "fields": [{ "path": "resolver", "label": "Resolver", "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"] } }]
       },
-      "transferOwnership(address)": {
+      "transferOwnership(address newOwner)": {
         "intent": "Transfer ownership",
         "fields": [{ "path": "newOwner", "label": "New owner", "format": "addressName", "params": { "types": ["eoa", "wallet", "contract"] } }]
       },
